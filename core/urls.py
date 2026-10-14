@@ -16,8 +16,17 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from fitness.views import inicio, vista_protegida_fbv, VistaProtegidaCBV
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include('fitness.urls')), 
+    path('api/', include('fitness.urls')), # Tu API existente
+    
+    # Rutas de autenticación (Login/Logout)
+    path('accounts/', include('django.contrib.auth.urls')),
+    
+    # Rutas de vistas estándar (Públicas y Protegidas)
+    path('', inicio, name='inicio'),
+    path('protegida-fbv/', vista_protegida_fbv, name='protegida_fbv'),
+    path('protegida-cbv/', VistaProtegidaCBV.as_view(), name='protegida_cbv'),
 ]

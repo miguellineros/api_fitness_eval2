@@ -1,0 +1,7 @@
+{% extends 'base.html' %}
+{% block contenido %}
+  <h2 style="color: green;">Acceso Permitido</h2>
+  <p>Estás viendo una vista protegida tipo: <strong>{{ tipo }}</strong></p>
+  <p>Solo los usuarios autenticados pueden ver esto.</p>
+  <a href="{% url 'inicio' %}">Volver al inicio</a>
+{% endblock %}

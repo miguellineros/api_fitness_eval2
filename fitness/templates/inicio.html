@@ -1,12 +1,17 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <title>API de Fitness</title>
-</head>
-<body>
-    <h1>Bienvenido a la API de Fitness</h1>
-    <p>Para ver los endpoints de la API, dirígete a: <a href="/api/">/api/</a></p>
-</body>
-</html>
-
+{% extends 'base.html' %}
+{% block contenido %}
+  <h1>Bienvenido a la API Fitness</h1>
+  <p>Esta es una vista PÚBLICA. Cualquiera puede verla.</p>
+  
+  {% if user.is_authenticated %}
+    <p>Hola, {{ user.username }}!</p>
+    <a href="{% url 'protegida_fbv' %}">Ir a Vista Protegida FBV</a> | 
+    <a href="{% url 'protegida_cbv' %}">Ir a Vista Protegida CBV</a> |
+    <form action="{% url 'logout' %}" method="post" style="display:inline;">
+      {% csrf_token %}
+      <button type="submit">Cerrar Sesión</button>
+    </form>
+  {% else %}
+    <a href="{% url 'login' %}">Iniciar Sesión para ver contenido protegido</a>
+  {% endif %}
+{% endblock %}
